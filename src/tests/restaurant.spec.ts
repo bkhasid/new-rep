@@ -17,8 +17,8 @@ describe('Restaurants tests', () => {
         const restaurants: ApiResponse<Restaurant[]> = await restaurantsAPI.getRestaurants();
 
         //Assert
-        expect(restaurants.success).to.be.true;
         const actualAmount = restaurants.data?.length;
+        expect(restaurants.success).to.be.true;
         expect(actualAmount).to.equal(3, 'Restaurants amount is not as expected');
     })
 
