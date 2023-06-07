@@ -2,7 +2,7 @@ import { test, expect } from '@playwright/test';
 import { BrowseWrapper } from '../infra/browser/browser';
 import restaurantsAPI from '../logic/api/restaurantsAPI';
 
-test.describe('Base test', () => {
+test.describe('Base API test', () => {
 
     let browser: BrowseWrapper
 
@@ -18,10 +18,10 @@ test.describe('Base test', () => {
         await browser.close()
     })
 
-    test('get data from api example', async () => {
+    test('Create restaurants via api', async () => {
         //Arrange
         const myNewRest = { address: "My Addess 1", id: 233, name: "My Restaurant", score: 2.3 }
-        const results = await restaurantsAPI.createRestaurant(myNewRest);
+        await restaurantsAPI.createRestaurant(myNewRest);
 
         //Act
         const getByIdResponse = await restaurantsAPI.getRestaurantById(233);

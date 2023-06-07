@@ -3,7 +3,7 @@ import { BrowseWrapper } from '../infra/browser/browser';
 import configJson from '../../config.json'
 import { RestaurantPage } from '../logic/page/restaurant-page';
 
-test.describe('Base test', () => {
+test.describe('Base UI Test', () => {
 
   let browser: BrowseWrapper
   let resturantPage: RestaurantPage;
