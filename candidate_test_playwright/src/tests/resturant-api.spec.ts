@@ -27,7 +27,7 @@ test.describe('Base test', () => {
         const getByIdResponse = await restaurantsAPI.getRestaurantById(233);
 
         //Assert
-        await expect(getByIdResponse.status()).toEqual(201)
-        await expect(getByIdResponse.ok).toBeTruthy
+        expect(getByIdResponse.status()).toEqual(201)
+        expect(getByIdResponse.ok).toBeTruthy
     })
 })
