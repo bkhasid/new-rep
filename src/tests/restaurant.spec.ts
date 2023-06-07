@@ -25,7 +25,7 @@ describe('Restaurants tests', () => {
     it('Get restaurant by id', async () => {
         //Arrange
         const myNewRest = { address: "My Addess 1", id: 233, name: "My Restaurant", score: 2.3 };
-        const createResponse = await restaurantsAPI.createRestaurant(myNewRest);
+        await restaurantsAPI.createRestaurant(myNewRest);
 
         //Act
         const getByIdResponse = await restaurantsAPI.getRestaurantById(233);
