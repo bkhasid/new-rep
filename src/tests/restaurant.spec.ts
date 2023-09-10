@@ -1,8 +1,6 @@
 import { ApiResponse } from '../infra/rest/api-response';
 import { Restaurant } from '../logic/REST/API-Response/get-restaurants-response';
 import { expect } from 'chai';
-
-
 import restaurantsAPI from '../logic/REST/restaurantsAPI';
 
 describe('Restaurants tests', () => {
