@@ -1,53 +1,55 @@
-import { BrowserContext, chromium, Page } from "playwright";
-import { PageBase } from '../../logic/pages/page-base';
+import { Browser, Page, chromium } from "@playwright/test";
+import { BasePage } from "../../logic/page/base-page";
 
-export class BrowserWrapper {
 
-    browserContext: BrowserContext | undefined
-    browserTimestemp: string;
-    userDataDir: string | undefined
+export class BrowseWrapper {
 
-    constructor() {
-        this.browserTimestemp = new Date().toString();
+    browser!: Browser
+
+    closeContext = async () => {
+        const context = await this.getContext();
+        await context.close()
     }
 
     close = async () => {
-        await this.browserContext?.close()
+        await this.browser.close()
     }
 
-    private getContext = async (testName?: string) => {
-        if (!this.browserContext) {
-            let browserContextArgs = [
-                '--ignore-certificate-errors',
-                '--no-sandbox'];
-            this.browserContext =
-                await (await chromium.launch({
-                    headless: false, args: browserContextArgs
-                }))
-                    .newContext({
-                        viewport: { width: 1280, height: 1024 },
-                    });
+    private getContext = async () => {
+        if (!this.browser || this.browser.contexts().length == 0) {
+            const browser = await this.getBrowser()
+            await browser.newContext()
         }
-        return this.browserContext;
+        return this.browser.contexts()[0]
     }
 
-    getPage = async (testName?: string) => {
-        const context = await this.getContext(testName);
+    private getBrowser = async () => {
+        if (!this.browser) {
+            const browserContextArgs = ['--ignore-certificate-errors', '--no-sandbox']
+            const browser = await chromium.launch({
+                args: browserContextArgs,
+            })
+            this.browser = browser
+        }
+        return this.browser
+    }
+
+    getPage = async () => {
+        const context = await this.getContext()
         if (context.pages().length == 0) {
-            return await context.newPage();
+            return await context.newPage()
         } else {
-            return context.pages()[0];
+            return context.pages()[0]
         }
     }
 
-    newPage = async <T extends PageBase>(pageType: new (page: Page) => T, url?: string, testName?: string) => {
-        let newPage = await this.getPage(testName);
+    newPage = async <T extends BasePage>(pageType: new (page: Page) => T, url?: string) => {
+        const newPage = await this.getPage()
         if (url) {
             await newPage.goto(url)
         }
-        let page = new pageType(newPage)
+        const page = new pageType(newPage)
         await page.initPage()
         return page
     }
-
 }
