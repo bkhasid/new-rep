@@ -1,5 +1,5 @@
 
-import jsonConfig from '../../../candidate_test_playwright/config.json';
+import jsonConfig from '../../../config.json';
 import { getRequest, postRequest } from '../../infra/rest/api-request';
 import { Restaurant } from './API-Request/get-restaurants-request';
 
