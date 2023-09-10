@@ -1,6 +1,6 @@
 import { test, expect } from '@playwright/test';
 import { BrowseWrapper } from '../infra/browser/browser';
-import configJson from '../../config.json'
+import configJson from '../../candidate_test_playwright/config.json'
 import { RestaurantPage } from '../logic/page/restaurant-page';
 
 test.describe('Base UI Test', () => {
