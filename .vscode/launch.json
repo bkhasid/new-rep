@@ -11,7 +11,7 @@
             "skipFiles": [
                 "<node_internals>/**"
             ],
-            "program": "${workspaceFolder}\\node_modules\\mocha\\bin\\_mocha",
+            "program": "${workspaceFolder}/node_modules/mocha/bin/_mocha",
             "args": [
                 "-r",
                 "ts-node/register",
@@ -20,7 +20,7 @@
                 "20000",
                 "--reporter",
                 "mochawesome",
-                "${workspaceFolder}\\src\\tests\\**\\*.spec.ts",
+                "${workspaceFolder}/src/tests/**/*.spec.ts",
             ],
             "outFiles": [
                 "${workspaceFolder}/**/*.js"

@@ -16,4 +16,21 @@ const getRequest = async (url: string, param?: any) => {
     })
 }
 
-export { postRequest, getRequest }
+const updateRequest = async (url: string, data?: any) => {
+    const context = await request.newContext()
+    return await context.patch(url, {
+        data: data ? data : ''
+    })
+}
+
+const getAllRequest = async (url: string) => {
+    const context = await request.newContext()
+    return await context.get(url)
+}
+
+const deleteRequest = async (url: string) => {
+    const context = await request.newContext()
+    return await context.delete(url)
+}
+
+export { postRequest, getRequest, updateRequest, getAllRequest, deleteRequest }
